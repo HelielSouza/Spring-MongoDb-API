@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.workhop.apimongo.domain.Post;
 import com.workhop.apimongo.domain.User;
+import com.workhop.apimongo.dtos.AuthorDTO;
 import com.workhop.apimongo.repositories.PostRepository;
 import com.workhop.apimongo.repositories.UserRepository;
 
@@ -35,12 +36,12 @@ public class Instantiation implements CommandLineRunner {
 		User suzanna = new User(null, "Suzanna Johnson", "suzi@gmail.com");
 		User kvara = new User(null, "Khvicha Kvaratskhelia", "kvara@gmail.com");
 		
-		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Bora", "Bora dar uma saida hahaha", kvara);
-		Post post2 = new Post(null, sdf.parse("25/03/2018"), "Tá dificil...", "Será que meu time ganha hoje? ... ", johnes);
-		
 		userRepository.saveAll(Arrays.asList(johnes, suzanna, kvara));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Bora", "Bora dar uma saida hahaha", new AuthorDTO(kvara));
+		Post post2 = new Post(null, sdf.parse("25/03/2018"), "Tá dificil...", "Será que meu time ganha hoje? ... ", new AuthorDTO(johnes));
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 	}
-
 }
 
