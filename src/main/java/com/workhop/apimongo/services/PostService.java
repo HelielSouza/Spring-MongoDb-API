@@ -1,5 +1,6 @@
 package com.workhop.apimongo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,4 +20,8 @@ public class PostService {
 	    Optional<Post> user = repository.findById(id);
 	    return user.orElseThrow(() -> new ObjectNotFoundException("Post not found"));
 	}	
+	
+	public List<Post> findByTitle (String text) {
+		return repository.findByTitleContainingIgnoreCase(text);
+	}
 }
