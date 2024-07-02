@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.workhop.apimongo.domain.Post;
 import com.workhop.apimongo.domain.User;
 import com.workhop.apimongo.dtos.UserDTO;
 import com.workhop.apimongo.services.UserService;
@@ -41,6 +42,12 @@ public class UserController {
 	public ResponseEntity<UserDTO> findByID(@PathVariable String id) {
 		User obj = service.findByID(id);
 		return ResponseEntity.ok().body(new UserDTO(obj));
+	}
+	
+	@GetMapping(value="/{id}/posts")
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+		User obj = service.findByID(id);
+		return ResponseEntity.ok().body(obj.getPosts());
 	}
 	
 	@PostMapping
